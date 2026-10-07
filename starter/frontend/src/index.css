@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+body {
+font-family: 'Poppins', sans-serif;
+background-color: #f5f3ff;
+color: #1e1b4b;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+font-family: 'Courier New', Courier, monospace;
+background-color: #ede9fe;
+color: #6d28d9;
+padding: 2px 6px;
+border-radius: 4px;
+}

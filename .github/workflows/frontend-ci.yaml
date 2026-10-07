@@ -1,0 +1,84 @@
+name: Frontend Continuous Integration
+
+# Validates every PR touching the frontend before it can merge to main.
+# Can also be started manually from the Actions tab.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "starter/frontend/**"
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: starter/frontend
+
+jobs:
+  # ---- ESLint check -------------------------------------------------
+  code-quality:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Restore npm cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: frontend-npm-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: frontend-npm-
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+  # ---- Jest test suite ------------------------------------------------
+  unit-tests:
+    name: Jest Test Suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Restore npm cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: frontend-npm-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: frontend-npm-
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Run Jest in CI mode
+        run: npm test
+        env:
+          CI: true
+
+  # ---- Docker build (gated on lint + test passing) ----------------------
+  docker-image:
+    name: Build Frontend Image
+    needs: [code-quality, unit-tests]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build image (validation only, not pushed)
+        run: |
+          docker build \
+            --build-arg REACT_APP_MOVIE_API_URL=http://localhost:5000 \
+            --tag mp-frontend:ci-${{ github.run_number }} .
