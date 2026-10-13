@@ -310,4 +310,7 @@ This project is distributed under the terms of the included LICENSE.md
 file.
 ## Resubmission note
 
-Deployment screenshots from an earlier environment are intentionally excluded from this corrected package. Generate fresh screenshots only after deploying this exact commit to your own AWS/EKS environment. Do not copy or reuse another learner's LoadBalancer endpoint.
+Earlier deployment screenshots were removed. Deploy this exact commit to your own AWS/EKS
+environment, run all four workflows successfully, then capture the screenshots listed in
+`Screenshots/README.md`. Every screenshot must come from your own real runs and show your own
+repository URL and LoadBalancer endpoints.

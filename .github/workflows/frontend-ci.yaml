@@ -77,6 +77,21 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Restore npm cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: frontend-npm-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: frontend-npm-
+
+      - name: Install npm dependencies
+        run: npm ci
+
       - name: Build image (validation only, not pushed)
         run: |
           docker build \
