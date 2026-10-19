@@ -12,9 +12,7 @@ function MovieList({ onMovieClick }) {
       try {
         setLoading(true);
 
-        const response = await axios.get(
-          `${process.env.REACT_APP_MOVIE_API_URL}/movies`
-        );
+        const response = await axios.get(`${process.env.REACT_APP_MOVIE_API_URL}/movies`);
 
         setMovies(response.data.movies);
       } catch (fetchError) {
@@ -39,12 +37,7 @@ function MovieList({ onMovieClick }) {
   return (
     <ul>
       {movies.map((movie) => (
-        <li
-          className="movieItem"
-          key={movie.id}
-          onClick={() => onMovieClick(movie)}
-          style={{ cursor: 'pointer' }}
-        >
+        <li className="movieItem" key={movie.id} onClick={() => onMovieClick(movie)} style={{ cursor: 'pointer' }}>
           {movie.title}
         </li>
       ))}

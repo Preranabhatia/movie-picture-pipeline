@@ -17,9 +17,7 @@ function MovieDetails({ movie }) {
       try {
         setLoading(true);
 
-        const response = await axios.get(
-          `${process.env.REACT_APP_MOVIE_API_URL}/movies/${movie.id}`
-        );
+        const response = await axios.get(`${process.env.REACT_APP_MOVIE_API_URL}/movies/${movie.id}`);
 
         setDetails(response.data.movie);
       } catch (fetchError) {

@@ -18,7 +18,7 @@ the development and release workflow for a movie catalog application.
 
 The project contains two applications:
 
-Frontend --- A TypeScript application built with the React
+Frontend --- A JavaScript application built with the React
 framework.
 
 Backend --- A Python API built with the Flask framework.
@@ -308,6 +308,3 @@ GitHub Username: Preranabhatia
 
 This project is distributed under the terms of the included LICENSE.md
 file.
-## Resubmission note
-
-Deployment screenshots from an earlier environment are intentionally excluded from this corrected package. Generate fresh screenshots only after deploying this exact commit to your own AWS/EKS environment. Do not copy or reuse another learner's LoadBalancer endpoint.
